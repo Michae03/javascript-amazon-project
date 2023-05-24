@@ -1,5 +1,6 @@
 let productsHTML = ''
 
+//Generates the product grid
 products.forEach((product) => {
   productsHTML += `
     <div class="product-container">
@@ -41,7 +42,7 @@ products.forEach((product) => {
 
     <div class="product-spacer"></div>
 
-    <div class="added-to-cart">
+    <div class="added-to-cart js-added-to-cart-${product.id}">
       <img src="images/icons/checkmark.png">
       Added
     </div>
@@ -56,15 +57,31 @@ products.forEach((product) => {
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
+  let addedMessTimeoutId;
   button.addEventListener('click', () => {
-    const productId = button.dataset.productId;
-    
-    const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
+    //const productId = button.dataset.productId; taking product data assigned to button
+    const {dataset: {productId}} = button;
 
+    //Taking quantity number
+    const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
     quantity = Number(quantitySelector.value);
 
-    console.log(quantity);
+    //Rendering "Added" text
+    const addedMess = document.querySelector(`.js-added-to-cart-${productId}`);
+    addedMess.classList.add('added-to-cart-visible')
+    // Check if a previous timeoutId exists. If it does,  we will stop it.
+    if (addedMessTimeoutId) {
+      clearTimeout(addedMessTimeoutId);
+    }
+    const timeoutId = setTimeout(() => {
+      addedMess.classList.remove('added-to-cart-visible');
+    }, 2000);
 
+    // Save the timeoutId so we can stop it later.
+    addedMessTimeoutId = timeoutId;
+
+
+    //Checks if item is already in the cart
     let matchingItem;
 
     cart.forEach((item) => {
@@ -76,12 +93,10 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
       if(matchingItem) {
         matchingItem.quantity += quantity;
       } else {
-        cart.push({
-          productId: productId,
-          quantity: quantity
-        });
+        cart.push({productId, quantity})
       }
     
+      //Rendering cart quantity on icon
       let cartQuantity = 0;
 
       cart.forEach((item) => {
