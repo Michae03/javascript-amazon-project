@@ -78,7 +78,7 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
       } else {
         cart.push({
           productId: productId,
-          quantity: 1
+          quantity: quantity
         });
       }
     

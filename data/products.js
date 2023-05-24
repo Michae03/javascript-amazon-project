@@ -1,5 +1,35 @@
 const products = [
   {
+    id: "kkj7sss1-aacx-712g-nh42-efdsa11678u6",
+    image: "images/products/umbrella.jpg",
+    name: "Dark Green Anti-Rain Umbrella",
+    rating: {
+      stars: 1.5,
+      count: 53
+    },
+    priceCents: 1640,
+    keywords: [
+      "umbrella",
+      "rain"
+    ]
+  },
+  {
+    id: "kds719dj-aacx-766g-caa1-e1d8211678u6",
+    image: "images/products/backpack.jpg",
+    name: "Black School Backpack",
+    rating: {
+      stars: 3.5,
+      count: 8
+    },
+    priceCents: 2365,
+    keywords: [
+      "backpack",
+      "school",
+      "black"
+    ]
+
+  },
+  {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
     name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
